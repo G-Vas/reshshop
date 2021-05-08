@@ -1,0 +1,29 @@
+<form action="{% url 'filter' %}" method="get">
+	<div id="sidebar" class="left">
+    	<div class="sidebar_box"><span class="bottom"></span>
+            <h3>Categories</h3>
+            <div class="content">
+                <ul class="sidebar_list">
+                    {% for category in view.get_category_list %}
+                        <li>
+                            <label><input type="checkbox" class="checkbox-row" name="category" value={{ category.id }}><span>{{ category.name }}</span></label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="sidebar_box"><span class="bottom"></span>
+            <h3>Sub Categories</h3>
+            <div class="content">
+                <ul class="sidebar_list">
+                    {% for sub_category in view.get_subcategory %}
+                        <li>
+                            <label><input type="checkbox" class="checkbox-row" name="sub_category" value={{ sub_category.id }}><span>{{ sub_category.name }}</span></label>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <button type="submit">find</button>
+        </div>
+    </div>
+</form>
