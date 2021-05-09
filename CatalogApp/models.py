@@ -51,9 +51,9 @@ class Seed(models.Model):
     price = models.FloatField("Цена", default=10.50)
     number_of_seeds = models.IntegerField("количество семян", default=1000)
     poster = models.ImageField("Постер", upload_to="seed_posters/")
-    country = models.CharField("Страна", max_length=30)
+    country = models.CharField("Страна", max_length=30, null=True)
     sub_category = models.ManyToManyField(SubCategory, verbose_name="Подкатегории")
-    purpose = models.CharField("Предназначение", max_length=100, default='Корм')
+    purpose = models.CharField("Предназначение", max_length=100, default='Выращивание в горшке или открытом грунте')
     manufacturer = models.ForeignKey(Manufacturer, verbose_name="Производитель", on_delete=models.SET_NULL, null=True)
     category = models.ForeignKey(
         Category, verbose_name="Категория", on_delete=models.SET_NULL, null=True
