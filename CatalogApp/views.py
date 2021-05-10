@@ -5,6 +5,9 @@ from .models import Seed, Category, SubCategory
 
 
 class ProdListMixin:
+    def get_last_products(self):
+        return Seed.objects.filter(draft=False).order_by('-id')[:10]
+
     def get_prod_list(self):
         return Seed.objects.all()
 
@@ -38,18 +41,18 @@ class Faqs(ProdListMixin, View):
         return render(request, 'CatalogApp/faqs.html')
 
 
-class Index(ProdListMixin, ListView):
-    paginate_by = 8
+class Catalog(ProdListMixin, ListView):
+    paginate_by = 9
     ordering = ['-id']
     model = Seed
     queryset = Seed.objects.filter(draft=False)
-    template_name = "CatalogApp/index.html"
+    template_name = "CatalogApp2/shop.html"
 
 
 class SeedDetail(ProdListMixin, DetailView):
     model = Seed
     slug_field = "url"
-    template_name = 'CatalogApp/productdetail.html'
+    template_name = 'CatalogApp2/shop-detail.html'
 
 
 class FilterSeedView(ProdListMixin, ListView):
