@@ -23,22 +23,42 @@ class ProdListMixin:
 
 class About(ProdListMixin, View):
     def get(self, request):
-        return render(request, 'CatalogApp/about.html')
+        return render(request, 'CatalogApp2/about.html')
 
 
 class Checkout(ProdListMixin, View):
     def get(self, request):
-        return render(request, 'CatalogApp/checkout.html')
+        return render(request, 'CatalogApp2/checkout.html')
 
 
 class Contact(ProdListMixin, View):
     def get(self, request):
-        return render(request, 'CatalogApp/contact.html')
+        return render(request, 'CatalogApp2/contact-us.html')
+
+
+class Cart(ProdListMixin, View):
+    def get(self, request):
+        return render(request, 'CatalogApp2/cart.html')
+
+
+class Account(ProdListMixin, View):
+    def get(self, request):
+        return render(request, 'CatalogApp2/my-account.html')
 
 
 class Faqs(ProdListMixin, View):
     def get(self, request):
         return render(request, 'CatalogApp/faqs.html')
+
+
+class Index(ProdListMixin, View):
+    def get(self, request):
+        return render(request, 'CatalogApp2/index.html')
+
+
+class Wishlist(ProdListMixin, View):
+    def get(self, request):
+        return render(request, 'CatalogApp2/wishlist.html')
 
 
 class Catalog(ProdListMixin, ListView):
@@ -55,9 +75,21 @@ class SeedDetail(ProdListMixin, DetailView):
     template_name = 'CatalogApp2/shop-detail.html'
 
 
+class Search(ListView, ProdListMixin):
+    paginate_by = 9
+    template_name = "CatalogApp2/shop.html"
+    def get_queryset(self):
+        return Seed.objects.filter(title__icontains=self.request.GET.get("q"))
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(Search, self).get_context_data(*args, **kwargs)
+        context["q"] = self.request.GET.get("q")
+        return context
+
+
 class FilterSeedView(ProdListMixin, ListView):
-    template_name = "CatalogApp/index.html"
-    paginate_by = 8
+    template_name = "CatalogApp2/shop.html"
+    paginate_by = 9
     ordering = ['-id']
 
     def get_queryset(self):
