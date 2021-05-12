@@ -26,39 +26,14 @@ class About(ProdListMixin, View):
         return render(request, 'CatalogApp2/about.html')
 
 
-class Checkout(ProdListMixin, View):
-    def get(self, request):
-        return render(request, 'CatalogApp2/checkout.html')
-
-
 class Contact(ProdListMixin, View):
     def get(self, request):
         return render(request, 'CatalogApp2/contact-us.html')
 
 
-class Cart(ProdListMixin, View):
-    def get(self, request):
-        return render(request, 'CatalogApp2/cart.html')
-
-
-class Account(ProdListMixin, View):
-    def get(self, request):
-        return render(request, 'CatalogApp2/my-account.html')
-
-
-class Faqs(ProdListMixin, View):
-    def get(self, request):
-        return render(request, 'CatalogApp/faqs.html')
-
-
 class Index(ProdListMixin, View):
     def get(self, request):
         return render(request, 'CatalogApp2/index.html')
-
-
-class Wishlist(ProdListMixin, View):
-    def get(self, request):
-        return render(request, 'CatalogApp2/wishlist.html')
 
 
 class Catalog(ProdListMixin, ListView):
